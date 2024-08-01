@@ -40,5 +40,8 @@ mvnw
 mvnw.cmd
 .mvn
 
+.flattened-pom.xml
+
+
 ### VS Code ###
 .vscode/
