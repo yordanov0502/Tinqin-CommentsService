@@ -29,5 +29,16 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Ignore flattened pom files
+**/*.flattened-pom.xml
+
+# Ignore .env file
+**/.env
+
+# Ignore mvnw and mvnw.cmd
+mvnw
+mvnw.cmd
+.mvn
+
 ### VS Code ###
 .vscode/
