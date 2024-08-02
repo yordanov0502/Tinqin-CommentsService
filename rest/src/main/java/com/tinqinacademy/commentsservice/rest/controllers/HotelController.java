@@ -4,12 +4,12 @@ import com.tinqinacademy.commentsservice.api.error.Errors;
 import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.AddCommentForRoomInput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.AddCommentForRoomOperation;
 import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.AddCommentForRoomOutput;
-import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.EditCommentForRoomInput;
-import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.EditCommentForRoomOutput;
+import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.UserEditCommentForRoomInput;
+import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.UserEditCommentForRoomOperation;
+import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.UserEditCommentForRoomOutput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.GetAllCommentsOfRoomInput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.GetAllCommentsOfRoomOperation;
 import com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.GetAllCommentsOfRoomOutput;
-import com.tinqinacademy.commentsservice.api.services.HotelService;
 import com.tinqinacademy.commentsservice.api.RestApiRoutes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class HotelController extends BaseController{
 
-   private final HotelService hotelService;
    private final AddCommentForRoomOperation addCommentForRoomOperation;
    private final GetAllCommentsOfRoomOperation getAllCommentsOfRoomOperation;
+   private final UserEditCommentForRoomOperation userEditCommentForRoomOperation;
 
 
    @Operation(summary = "Get list of all comments for room.",
@@ -78,16 +78,16 @@ public class HotelController extends BaseController{
            @ApiResponse(responseCode = "400", description = "Bad request."),
            @ApiResponse(responseCode = "404", description = "Not found.")
    })
-   @PutMapping(RestApiRoutes.EDIT_COMMENT_FOR_ROOM)
-   public ResponseEntity<?> editCommentForRoom(@PathVariable String commentId,@RequestBody EditCommentForRoomInput inputArg) {
+   @PatchMapping(value = RestApiRoutes.EDIT_COMMENT_FOR_ROOM)
+   public ResponseEntity<?> editCommentForRoom(@PathVariable String commentId,@RequestBody UserEditCommentForRoomInput inputArg) {
 
-      EditCommentForRoomInput input = inputArg.toBuilder()
+      UserEditCommentForRoomInput input = inputArg.toBuilder()
               .commentId(commentId)
               .build();
 
-      EditCommentForRoomOutput output = hotelService.editCommentForRoom(input);
+      Either<Errors, UserEditCommentForRoomOutput> either = userEditCommentForRoomOperation.process(input);
 
-      return new ResponseEntity<>(output, HttpStatus.OK);
+      return mapToResponseEntity(either,HttpStatus.OK);
    }
 
 }

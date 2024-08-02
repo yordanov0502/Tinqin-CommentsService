@@ -36,6 +36,8 @@ public class GetAllCommentsOfRoomOperationProcessor extends BaseOperationProcess
         return Try.of(() -> {
             log.info(String.format("Start %s %s input: %s", this.getClass().getSimpleName(), LoggingUtils.getMethodName(),input));
 
+            validate(input);
+
             List<Comment> commentsOfRoom = commentRepository.findAllByRoomId(UUID.fromString(input.getRoomId()));
             GetAllCommentsOfRoomOutput output = conversionService.convert(commentsOfRoom,GetAllCommentsOfRoomOutput.class);
 
