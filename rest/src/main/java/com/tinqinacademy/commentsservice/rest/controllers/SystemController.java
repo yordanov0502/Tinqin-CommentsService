@@ -9,7 +9,6 @@ import com.tinqinacademy.commentsservice.api.RestApiRoutes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,7 @@ public class SystemController {
             @ApiResponse(responseCode = "404", description = "Not found.")
     })
     @PutMapping(RestApiRoutes.ADMIN_EDIT_COMMENT_FOR_ROOM)
-    public ResponseEntity<?> editCommentForRoom(@PathVariable String commentId, @Valid @RequestBody EditCommentForRoomInput inputArg) {
+    public ResponseEntity<?> editCommentForRoom(@PathVariable String commentId,@RequestBody EditCommentForRoomInput inputArg) {
 
         EditCommentForRoomInput input = inputArg.toBuilder()
                 .commentId(commentId)

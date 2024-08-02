@@ -1,6 +1,8 @@
 package com.tinqinacademy.commentsservice.rest.controllers;
 
+import com.tinqinacademy.commentsservice.api.error.Errors;
 import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.AddCommentForRoomInput;
+import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.AddCommentForRoomOperation;
 import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.AddCommentForRoomOutput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.EditCommentForRoomInput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.EditCommentForRoomOutput;
@@ -11,7 +13,7 @@ import com.tinqinacademy.commentsservice.api.RestApiRoutes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
+import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +21,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-public class HotelController {
+public class HotelController extends BaseController{
 
    private final HotelService hotelService;
+   private final AddCommentForRoomOperation addCommentForRoomOperation;
 
 
 
@@ -54,15 +57,15 @@ public class HotelController {
            @ApiResponse(responseCode = "404", description = "Not found.")
    })
    @PostMapping(RestApiRoutes.ADD_COMMENT_FOR_ROOM)
-   public ResponseEntity<?> addCommentForRoom(@PathVariable String roomId,@Valid @RequestBody AddCommentForRoomInput inputArg) {
+   public ResponseEntity<?> addCommentForRoom(@PathVariable String roomId,@RequestBody AddCommentForRoomInput inputArg) {
 
       AddCommentForRoomInput input = inputArg.toBuilder()
               .roomId(roomId)
               .build();
 
-      AddCommentForRoomOutput output = hotelService.addCommentForRoom(input);
+      Either<Errors,AddCommentForRoomOutput> either = addCommentForRoomOperation.process(input);
 
-      return new ResponseEntity<>(output, HttpStatus.CREATED);
+      return mapToResponseEntity(either,HttpStatus.CREATED);
    }
 
 
@@ -75,7 +78,7 @@ public class HotelController {
            @ApiResponse(responseCode = "404", description = "Not found.")
    })
    @PutMapping(RestApiRoutes.EDIT_COMMENT_FOR_ROOM)
-   public ResponseEntity<?> editCommentForRoom(@PathVariable String commentId,@Valid @RequestBody EditCommentForRoomInput inputArg) {
+   public ResponseEntity<?> editCommentForRoom(@PathVariable String commentId,@RequestBody EditCommentForRoomInput inputArg) {
 
       EditCommentForRoomInput input = inputArg.toBuilder()
               .commentId(commentId)
