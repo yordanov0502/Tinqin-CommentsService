@@ -1,4 +1,4 @@
-package com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom;
+package com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.content;
 
 import lombok.*;
 
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comment {
+public class CommentInfo {
     private String id;
     private String firstName;
     private String lastName;

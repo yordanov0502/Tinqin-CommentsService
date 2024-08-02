@@ -7,6 +7,7 @@ import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.
 import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.EditCommentForRoomInput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.EditCommentForRoomOutput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.GetAllCommentsOfRoomInput;
+import com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.GetAllCommentsOfRoomOperation;
 import com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.GetAllCommentsOfRoomOutput;
 import com.tinqinacademy.commentsservice.api.services.HotelService;
 import com.tinqinacademy.commentsservice.api.RestApiRoutes;
@@ -25,13 +26,13 @@ public class HotelController extends BaseController{
 
    private final HotelService hotelService;
    private final AddCommentForRoomOperation addCommentForRoomOperation;
+   private final GetAllCommentsOfRoomOperation getAllCommentsOfRoomOperation;
 
 
-
-   @Operation(summary = "Get list of all room's comments.",
-           description = "Gets list of all comments left for a certain room.")
+   @Operation(summary = "Get list of all comments for room.",
+           description = "Gets list of all commentInfos left for a certain room.")
    @ApiResponses(value = {
-           @ApiResponse(responseCode = "200", description = "Successfully returned all comments for a room."),
+           @ApiResponse(responseCode = "200", description = "Successfully returned all commentInfos for a room."),
            @ApiResponse(responseCode = "400", description = "Bad request."),
            @ApiResponse(responseCode = "404", description = "Not found.")
    })
@@ -42,9 +43,9 @@ public class HotelController extends BaseController{
               .roomId(roomId)
               .build();
 
-      GetAllCommentsOfRoomOutput output = hotelService.getAllCommentsOfRoom(input);
+      Either<Errors,GetAllCommentsOfRoomOutput> either = getAllCommentsOfRoomOperation.process(input);
 
-      return new ResponseEntity<>(output, HttpStatus.OK);
+      return mapToResponseEntity(either,HttpStatus.OK);
    }
 
 

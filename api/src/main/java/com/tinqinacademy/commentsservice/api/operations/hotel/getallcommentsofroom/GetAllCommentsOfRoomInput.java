@@ -1,5 +1,6 @@
 package com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom;
 
+import com.tinqinacademy.commentsservice.api.base.OperationInput;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllCommentsOfRoomInput {
+public class GetAllCommentsOfRoomInput implements OperationInput {
     @NotBlank
     private String roomId;
 
