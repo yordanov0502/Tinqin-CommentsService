@@ -2,11 +2,11 @@ package com.tinqinacademy.commentsservice.rest.controllers;
 
 import com.tinqinacademy.commentsservice.api.error.Errors;
 import com.tinqinacademy.commentsservice.api.operations.system.deletecommentforroom.DeleteCommentForRoomInput;
+import com.tinqinacademy.commentsservice.api.operations.system.deletecommentforroom.DeleteCommentForRoomOperation;
 import com.tinqinacademy.commentsservice.api.operations.system.deletecommentforroom.DeleteCommentForRoomOutput;
 import com.tinqinacademy.commentsservice.api.operations.system.editcommentforroom.AdminEditCommentForRoomInput;
 import com.tinqinacademy.commentsservice.api.operations.system.editcommentforroom.AdminEditCommentForRoomOperation;
 import com.tinqinacademy.commentsservice.api.operations.system.editcommentforroom.AdminEditCommentForRoomOutput;
-import com.tinqinacademy.commentsservice.api.services.SystemService;
 import com.tinqinacademy.commentsservice.api.RestApiRoutes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class SystemController extends BaseController{
 
-    private final SystemService systemService;
     private final AdminEditCommentForRoomOperation adminEditCommentForRoomOperation;
+    private final DeleteCommentForRoomOperation deleteCommentForRoomOperation;
 
     @Operation(summary = "Edit a comment for room. (admin)",
             description = "Admin can edit any comment left for a certain room.")
@@ -59,9 +59,9 @@ public class SystemController extends BaseController{
                 .commentId(commentId)
                 .build();
 
-        DeleteCommentForRoomOutput output = systemService.deleteCommentForRoom(input);
+        Either<Errors,DeleteCommentForRoomOutput> either = deleteCommentForRoomOperation.process(input);
 
-        return new ResponseEntity<>(output, HttpStatus.OK);
+        return mapToResponseEntity(either,HttpStatus.OK);
     }
 
 }
