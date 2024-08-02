@@ -1,5 +1,6 @@
 package com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom;
 
+import com.tinqinacademy.commentsservice.api.base.OperationOutput;
 import lombok.*;
 
 @Builder(toBuilder = true)
@@ -8,6 +9,6 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditCommentForRoomOutput {
+public class UserEditCommentForRoomOutput implements OperationOutput {
     private String id;
 }

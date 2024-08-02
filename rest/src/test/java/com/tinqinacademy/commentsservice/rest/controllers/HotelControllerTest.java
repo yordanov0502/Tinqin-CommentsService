@@ -3,7 +3,7 @@ package com.tinqinacademy.commentsservice.rest.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tinqinacademy.commentsservice.api.RestApiRoutes;
 import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.AddCommentForRoomInput;
-import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.EditCommentForRoomInput;
+import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.UserEditCommentForRoomInput;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -127,7 +125,7 @@ class HotelControllerTest {
     void editCommentForRoomOk() throws Exception {
         String commentId = "1234";
 
-        EditCommentForRoomInput input = EditCommentForRoomInput.builder()
+        UserEditCommentForRoomInput input = UserEditCommentForRoomInput.builder()
                 .commentId(commentId)
                 .content("The room was cozy, shiny and large.")
                 .build();
@@ -147,7 +145,7 @@ class HotelControllerTest {
     void editCommentForRoomBadRequest() throws Exception {
         String commentId = "1234";
 
-        EditCommentForRoomInput input = EditCommentForRoomInput.builder()
+        UserEditCommentForRoomInput input = UserEditCommentForRoomInput.builder()
                 .commentId(commentId)
                 .content("")
                 .build();
@@ -167,7 +165,7 @@ class HotelControllerTest {
     void editCommentForRoomNotFound() throws Exception {
         String commentId = "1234";
 
-        EditCommentForRoomInput input = EditCommentForRoomInput.builder()
+        UserEditCommentForRoomInput input = UserEditCommentForRoomInput.builder()
                 .commentId(commentId)
                 .content("The room was cozy, shiny and large.")
                 .build();

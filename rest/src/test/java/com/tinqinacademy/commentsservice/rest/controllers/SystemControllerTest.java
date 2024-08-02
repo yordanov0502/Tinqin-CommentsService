@@ -2,7 +2,7 @@ package com.tinqinacademy.commentsservice.rest.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tinqinacademy.commentsservice.api.RestApiRoutes;
-import com.tinqinacademy.commentsservice.api.operations.system.editcommentforroom.EditCommentForRoomInput;
+import com.tinqinacademy.commentsservice.api.operations.system.editcommentforroom.AdminEditCommentForRoomInput;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ class SystemControllerTest {
     void editCommentForRoomOk() throws Exception {
         String commentId = "1234";
 
-        EditCommentForRoomInput input = EditCommentForRoomInput.builder()
+        AdminEditCommentForRoomInput input = AdminEditCommentForRoomInput.builder()
                 .commentId(commentId)
                 .roomNo("22B")
                 .firstName("Todor")
@@ -54,7 +54,7 @@ class SystemControllerTest {
     void editCommentForRoomBadRequest() throws Exception {
         String commentId = "1234";
 
-        EditCommentForRoomInput input = EditCommentForRoomInput.builder()
+        AdminEditCommentForRoomInput input = AdminEditCommentForRoomInput.builder()
                 .commentId(commentId)
                 .roomNo("22B")
                 .firstName("Todor")
@@ -77,7 +77,7 @@ class SystemControllerTest {
     void editCommentForRoomNotFound() throws Exception {
         String commentId = "1234";
 
-        EditCommentForRoomInput input = EditCommentForRoomInput.builder()
+        AdminEditCommentForRoomInput input = AdminEditCommentForRoomInput.builder()
                 .commentId(commentId)
                 .roomNo("22B")
                 .firstName("Todor")
