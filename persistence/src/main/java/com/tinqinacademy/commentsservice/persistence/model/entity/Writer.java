@@ -15,33 +15,25 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 @Entity
-@Table(name = "comments")
-public class Comment {
+@Table(name = "writers")
+public class Writer {
 
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "room_id", nullable = false)
-    private UUID roomId;
+    @Column(name = "first_name", nullable = false, length = 32)
+    private String firstName;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id", nullable = false)
-    private Writer writer;
-
-    @Column(name = "content", nullable = false, length = 1024, columnDefinition = "TEXT")
-    private String content;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "last_edited_by_id")
-    private Writer lastEditedBy;
+    @Column(name = "last_name", nullable = false, length = 32)
+    private String lastName;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "last_edited_date")
-    private LocalDateTime lastEditedDate;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 }
