@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.tinqinacademy</groupId>
+    <groupId>com.tinqinacademy.comments-service</groupId>
     <artifactId>comments-service</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
