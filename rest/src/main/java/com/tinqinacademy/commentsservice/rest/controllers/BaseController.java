@@ -1,7 +1,7 @@
 package com.tinqinacademy.commentsservice.rest.controllers;
 
 import com.tinqinacademy.commentsservice.api.base.OperationOutput;
-import com.tinqinacademy.commentsservice.api.error.Errors;
+import com.tinqinacademy.commentsservice.api.exceptions.Errors;
 import io.vavr.control.Either;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

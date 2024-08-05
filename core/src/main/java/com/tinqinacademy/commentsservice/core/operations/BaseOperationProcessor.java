@@ -1,9 +1,9 @@
 package com.tinqinacademy.commentsservice.core.operations;
 
 import com.tinqinacademy.commentsservice.api.base.OperationInput;
-import com.tinqinacademy.commentsservice.api.error.Error;
+import com.tinqinacademy.commentsservice.api.exceptions.Error;
 import com.tinqinacademy.commentsservice.core.exceptions.ExceptionService;
-import com.tinqinacademy.commentsservice.core.exceptions.custom.ViolationsException;
+import com.tinqinacademy.commentsservice.api.exceptions.custom.ViolationsException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;

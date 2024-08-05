@@ -1,4 +1,4 @@
-package com.tinqinacademy.commentsservice.core.exceptions.custom;
+package com.tinqinacademy.commentsservice.api.exceptions.custom;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

@@ -1,11 +1,11 @@
 package com.tinqinacademy.commentsservice.core.operations.hotel;
 
-import com.tinqinacademy.commentsservice.api.error.Errors;
+import com.tinqinacademy.commentsservice.api.exceptions.Errors;
 import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.UserEditCommentForRoomInput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.UserEditCommentForRoomOperation;
 import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.UserEditCommentForRoomOutput;
 import com.tinqinacademy.commentsservice.core.exceptions.ExceptionService;
-import com.tinqinacademy.commentsservice.core.exceptions.custom.NotFoundException;
+import com.tinqinacademy.commentsservice.api.exceptions.custom.NotFoundException;
 import com.tinqinacademy.commentsservice.core.operations.BaseOperationProcessor;
 import com.tinqinacademy.commentsservice.core.utils.LoggingUtils;
 import com.tinqinacademy.commentsservice.persistence.model.entity.Comment;

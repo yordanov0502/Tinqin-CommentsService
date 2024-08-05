@@ -1,7 +1,7 @@
 package com.tinqinacademy.commentsservice.core.utils;
 
 
-import com.tinqinacademy.commentsservice.core.exceptions.custom.NoMethodFoundException;
+import com.tinqinacademy.commentsservice.api.exceptions.custom.NoMethodFoundException;
 
 public class LoggingUtils {
 
