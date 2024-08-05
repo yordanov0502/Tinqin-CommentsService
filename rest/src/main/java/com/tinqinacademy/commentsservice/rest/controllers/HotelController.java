@@ -1,6 +1,6 @@
 package com.tinqinacademy.commentsservice.rest.controllers;
 
-import com.tinqinacademy.commentsservice.api.error.Errors;
+import com.tinqinacademy.commentsservice.api.exceptions.Errors;
 import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.AddCommentForRoomInput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.AddCommentForRoomOperation;
 import com.tinqinacademy.commentsservice.api.operations.hotel.addcommentforroom.AddCommentForRoomOutput;

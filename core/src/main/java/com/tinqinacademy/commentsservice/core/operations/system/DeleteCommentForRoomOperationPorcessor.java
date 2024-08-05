@@ -1,11 +1,11 @@
 package com.tinqinacademy.commentsservice.core.operations.system;
 
-import com.tinqinacademy.commentsservice.api.error.Errors;
+import com.tinqinacademy.commentsservice.api.exceptions.Errors;
 import com.tinqinacademy.commentsservice.api.operations.system.deletecommentforroom.DeleteCommentForRoomInput;
 import com.tinqinacademy.commentsservice.api.operations.system.deletecommentforroom.DeleteCommentForRoomOperation;
 import com.tinqinacademy.commentsservice.api.operations.system.deletecommentforroom.DeleteCommentForRoomOutput;
 import com.tinqinacademy.commentsservice.core.exceptions.ExceptionService;
-import com.tinqinacademy.commentsservice.core.exceptions.custom.NotFoundException;
+import com.tinqinacademy.commentsservice.api.exceptions.custom.NotFoundException;
 import com.tinqinacademy.commentsservice.core.operations.BaseOperationProcessor;
 import com.tinqinacademy.commentsservice.core.utils.LoggingUtils;
 import com.tinqinacademy.commentsservice.persistence.model.entity.Comment;

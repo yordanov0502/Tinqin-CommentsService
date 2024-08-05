@@ -1,9 +1,9 @@
 package com.tinqinacademy.commentsservice.core.exceptions;
 
-import com.tinqinacademy.commentsservice.api.error.Error;
-import com.tinqinacademy.commentsservice.api.error.Errors;
-import com.tinqinacademy.commentsservice.core.exceptions.custom.CustomException;
-import com.tinqinacademy.commentsservice.core.exceptions.custom.ViolationsException;
+import com.tinqinacademy.commentsservice.api.exceptions.Error;
+import com.tinqinacademy.commentsservice.api.exceptions.Errors;
+import com.tinqinacademy.commentsservice.api.exceptions.custom.CustomException;
+import com.tinqinacademy.commentsservice.api.exceptions.custom.ViolationsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 

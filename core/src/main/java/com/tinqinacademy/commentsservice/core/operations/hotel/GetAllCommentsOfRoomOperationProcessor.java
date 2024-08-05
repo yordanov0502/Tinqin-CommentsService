@@ -1,6 +1,6 @@
 package com.tinqinacademy.commentsservice.core.operations.hotel;
 
-import com.tinqinacademy.commentsservice.api.error.Errors;
+import com.tinqinacademy.commentsservice.api.exceptions.Errors;
 import com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.GetAllCommentsOfRoomInput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.GetAllCommentsOfRoomOperation;
 import com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.GetAllCommentsOfRoomOutput;
