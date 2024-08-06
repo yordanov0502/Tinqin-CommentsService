@@ -4,9 +4,11 @@ import com.tinqinacademy.commentsservice.api.base.OperationInput;
 import com.tinqinacademy.commentsservice.api.exceptions.Error;
 import com.tinqinacademy.commentsservice.core.exceptions.ExceptionService;
 import com.tinqinacademy.commentsservice.api.exceptions.custom.ViolationsException;
+import com.tinqinacademy.commentsservice.core.utils.LoggingUtils;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public abstract class BaseOperationProcessor {
@@ -35,5 +38,34 @@ public abstract class BaseOperationProcessor {
                     .collect(Collectors.toList());
             throw new ViolationsException("Violation exception occurred.",errorList);
         }
+    }
+
+
+    protected void logStart(Object... args) {
+        log.info(String.format("Start %s %s input: %s",
+                this.getClass().getSimpleName(),
+                LoggingUtils.getMethodName(),
+                formatArgs(args)
+        ));
+    }
+
+    protected void logEnd(Object... args) {
+        log.info(String.format("End %s %s output: %s",
+                this.getClass().getSimpleName(),
+                LoggingUtils.getMethodName(),
+                formatArgs(args)
+        ));
+    }
+
+    private String formatArgs(Object... args) {
+        StringBuilder sb = new StringBuilder();
+        for (Object arg : args) {
+            sb.append(arg).append(", ");
+        }
+
+        if (sb.length() > 0) {
+            sb.setLength(sb.length() - 2);
+        }
+        return sb.toString();
     }
 }
