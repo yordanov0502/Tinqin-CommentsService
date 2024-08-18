@@ -78,7 +78,7 @@ public class HotelController extends BaseController{
            @ApiResponse(responseCode = "400", description = "Bad request."),
            @ApiResponse(responseCode = "404", description = "Not found.")
    })
-   @PatchMapping(value = RestApiRoutes.EDIT_COMMENT_FOR_ROOM)
+   @PatchMapping(value = RestApiRoutes.EDIT_COMMENT_FOR_ROOM, consumes = "application/json-patch+json")
    public ResponseEntity<?> editCommentForRoom(@PathVariable String commentId,@RequestBody UserEditCommentForRoomInput inputArg) {
 
       UserEditCommentForRoomInput input = inputArg.toBuilder()

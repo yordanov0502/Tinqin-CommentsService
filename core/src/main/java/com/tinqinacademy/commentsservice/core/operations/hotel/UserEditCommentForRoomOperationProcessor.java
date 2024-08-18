@@ -1,5 +1,10 @@
 package com.tinqinacademy.commentsservice.core.operations.hotel;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatchException;
+import com.github.fge.jsonpatch.mergepatch.JsonMergePatch;
 import com.tinqinacademy.commentsservice.api.exceptions.Errors;
 import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.UserEditCommentForRoomInput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.UserEditCommentForRoomOperation;
@@ -24,10 +29,12 @@ import java.util.UUID;
 public class UserEditCommentForRoomOperationProcessor extends BaseOperationProcessor implements UserEditCommentForRoomOperation {
 
     private final CommentRepository commentRepository;
+    private final ObjectMapper objectMapper;
 
-    public UserEditCommentForRoomOperationProcessor(ConversionService conversionService, ExceptionService exceptionService, Validator validator, CommentRepository commentRepository) {
+    public UserEditCommentForRoomOperationProcessor(ConversionService conversionService, ExceptionService exceptionService, Validator validator, CommentRepository commentRepository, ObjectMapper objectMapper) {
         super(conversionService, exceptionService, validator);
         this.commentRepository = commentRepository;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -38,19 +45,31 @@ public class UserEditCommentForRoomOperationProcessor extends BaseOperationProce
 
             validate(input);
 
-            Comment currentComment = findCommentById(input.getCommentId());
-            Comment commentForUpdate = currentComment.toBuilder()
-                    .content(input.getContent())
-                    .lastEditedById(UUID.fromString("133994c0-dae8-44e5-9a43-6da439dfcafb")) //! MOCKED DATA (MUST BE TAKEN ID FROM JWT)
-                    .build();
-            commentRepository.save(commentForUpdate);
+            Comment currComment = commentRepository.findById(UUID.fromString(input.getCommentId()))
+                    .orElseThrow(() -> new NotFoundException(String.format("Comment with id[%s] doesn't exist.",input.getCommentId())));
+
+            Comment commentUpdate = conversionService.convert(input, Comment.class);
+                    System.out.println(commentUpdate.toString());
+
+            JsonNode currCommentNode = objectMapper.valueToTree(currComment);
+            JsonNode commentUpdateNode = objectMapper.valueToTree(commentUpdate);
+
+
+            try {
+                JsonMergePatch patch = JsonMergePatch.fromJson(commentUpdateNode);
+                commentUpdate = objectMapper.treeToValue(patch.apply(currCommentNode), Comment.class);
+            }
+            catch (JsonPatchException | JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
+            Comment updatedComment = commentRepository.save(commentUpdate);
 
             UserEditCommentForRoomOutput output = UserEditCommentForRoomOutput.builder()
-                    .id(input.getCommentId())
+                    .id(updatedComment.getId().toString())
                     .build();
 
             log.info(String.format("End %s %s output: %s", this.getClass().getSimpleName(),LoggingUtils.getMethodName(),output));
-
             return output;})
                 .toEither()
                 .mapLeft(exceptionService::handle);

@@ -5,6 +5,8 @@ import com.tinqinacademy.commentsservice.core.converters.BaseConverter;
 import com.tinqinacademy.commentsservice.persistence.model.entity.Comment;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class UserEditCommentForRoomInputToComment extends BaseConverter<UserEditCommentForRoomInput, Comment, UserEditCommentForRoomInputToComment> {
     public UserEditCommentForRoomInputToComment() {
@@ -15,6 +17,7 @@ public class UserEditCommentForRoomInputToComment extends BaseConverter<UserEdit
     protected Comment convertObj(UserEditCommentForRoomInput input) {
         Comment comment = Comment.builder()
                 .content(input.getContent())
+                .lastEditedById(UUID.fromString(input.getUserId()))
                 .build();
 
         return comment;
