@@ -18,4 +18,7 @@ public class UserEditCommentForRoomInput implements OperationInput {
     private String commentId;
     @NotBlank
     private String content;
+    @NotBlank
+    @UUID
+    private String userId;
 }
