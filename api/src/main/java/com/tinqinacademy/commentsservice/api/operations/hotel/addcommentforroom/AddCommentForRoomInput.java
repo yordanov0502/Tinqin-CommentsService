@@ -17,9 +17,8 @@ public class AddCommentForRoomInput implements OperationInput {
     @UUID
     private String roomId;
     @NotBlank
-    private String firstName;
-    @NotBlank
-    private String lastName;
+    @UUID
+    private String userId;
     @NotBlank
     private String content;
 }

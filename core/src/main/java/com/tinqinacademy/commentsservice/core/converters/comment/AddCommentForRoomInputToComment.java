@@ -19,8 +19,7 @@ public class AddCommentForRoomInputToComment extends BaseConverter<AddCommentFor
 
         Comment comment = Comment.builder()
                 .roomId(UUID.fromString(input.getRoomId()))
-                .firstName(input.getFirstName())
-                .lastName(input.getLastName())
+                .userId(UUID.fromString(input.getUserId()))
                 .content(input.getContent())
                 .build();
 
