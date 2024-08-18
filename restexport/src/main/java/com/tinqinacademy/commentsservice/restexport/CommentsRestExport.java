@@ -7,6 +7,8 @@ import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom
 import com.tinqinacademy.commentsservice.api.operations.hotel.editcommentforroom.UserEditCommentForRoomOutput;
 import com.tinqinacademy.commentsservice.api.operations.hotel.getallcommentsofroom.GetAllCommentsOfRoomOutput;
 import com.tinqinacademy.commentsservice.api.operations.system.deletecommentforroom.DeleteCommentForRoomOutput;
+import com.tinqinacademy.commentsservice.api.operations.system.editcommentforroom.AdminEditCommentForRoomInput;
+import com.tinqinacademy.commentsservice.api.operations.system.editcommentforroom.AdminEditCommentForRoomOutput;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -24,6 +26,9 @@ public interface CommentsRestExport {
     @RequestLine("PATCH "+RestApiRoutes.EDIT_COMMENT_FOR_ROOM)
     @Headers({"Content-Type: application/json-patch+json"})
     UserEditCommentForRoomOutput userEditCommentForRoom(@Param String commentId, @RequestBody UserEditCommentForRoomInput inputArg);
+
+    @RequestLine("PUT "+ RestApiRoutes.ADMIN_EDIT_COMMENT_FOR_ROOM)
+    AdminEditCommentForRoomOutput adminEditCommentForRoom(@Param String commentId, @RequestBody AdminEditCommentForRoomInput inputArg);
 
     @RequestLine("DELETE "+ RestApiRoutes.ADMIN_DELETE_COMMENT_FOR_ROOM)
     DeleteCommentForRoomOutput deleteCommentForRoom(@Param String commentId);

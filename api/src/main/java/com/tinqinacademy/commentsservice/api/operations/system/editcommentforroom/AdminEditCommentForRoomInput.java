@@ -17,7 +17,8 @@ public class AdminEditCommentForRoomInput implements OperationInput {
     @UUID
     private String commentId;
     @NotBlank
-    private String roomNo;
+    @UUID
+    private String roomId;
     @NotBlank
     @UUID
     private String userId;
