@@ -41,8 +41,7 @@ public class AdminEditCommentForRoomOperationProcessor extends BaseOperationProc
             Comment commentForUpdate = currentComment.toBuilder()
                     //TODO: fetch roomId by room number from HotelService, FOR NOW IT IS MOCKED WITH THE SAME roomId
                     .roomId(UUID.fromString("133994c0-dae8-44e5-9a43-6da439dfcafb")) //! MOCKED DATA
-                    .firstName(input.getFirstName())
-                    .lastName(input.getLastName())
+                    .userId(UUID.fromString(input.getUserId()))
                     .content(input.getContent())
                     .lastEditedById(UUID.fromString("133994c0-dae8-44e5-9a43-6da439dfcafb")) //! MOCKED DATA (MUST BE TAKEN FROM ID FROM THE JWT)
                     .build();

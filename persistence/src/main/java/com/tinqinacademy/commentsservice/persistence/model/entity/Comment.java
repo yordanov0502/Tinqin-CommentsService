@@ -26,11 +26,8 @@ public class Comment {
     @Column(name = "room_id", nullable = false)
     private UUID roomId;
 
-    @Column(name = "first_name", nullable = false, length = 32)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false, length = 32)
-    private String lastName;
+    @Column(name = "user_id", nullable = false)
+    private UUID userId;
 
     @Column(name = "content", nullable = false, length = 1024, columnDefinition = "TEXT")
     private String content;
